@@ -1,0 +1,57 @@
+.todo {
+    background: url(../assets/img/bgBody.webp) no-repeat center bottom, #333;
+    color: $main-text-color;
+    font-size: 1.5em;
+
+
+    &-overlay {
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        justify-content: center;
+        min-height: 300px;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, .9);
+    }
+
+    &-tasks {
+        flex: 4 auto;
+
+
+    }
+
+    &-form {
+        padding-top: 50px;
+        flex: 1 auto;
+
+    }
+}
+
+.complite {
+    text-decoration: line-through;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+
+    &__value {
+        flex: 3;
+
+    }
+
+    &:hover {
+        background-color: rgba(255, 255, 255, .3);
+    }
+
+
+
+
+    &__controls {
+        display: flex;
+        gap: 10px;
+
+    }
+}

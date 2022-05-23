@@ -1,0 +1,40 @@
+@import "vars/colors";
+
+
+._container {
+    max-width: 1024px;
+    width: 90%;
+    border-left: 5px solid $border-color;
+
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background: $main-bg-color-gradient;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+.btn {
+    color: inherit;
+
+    &__complite,
+    &__delite {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+}
+
+.svg {
+    position: absolute;
+    object-fit: cover;
+    width: 1em;
+    height: 1.2em;
+    fill: $main-text-color;
+}
