@@ -52,7 +52,7 @@ input {
 .btn {
   color: inherit;
 }
-.btn__complite, .btn__delite {
+.btn__complite, .btn__delete {
   display: flex;
   justify-content: center;
   align-items: center;
