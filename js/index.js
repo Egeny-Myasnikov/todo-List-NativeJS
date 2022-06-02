@@ -43,6 +43,12 @@ function toDoShka() {
     }
 
 
+    const filterTasks = () => {
+        const activeTasks = taskArr.length && taskArr.filter(item => item.completed === false);
+        const completedTasks = taskArr.length && taskArr.filter(item => item.completed === true);
+        taskArr = [...activeTasks, ...completedTasks];
+    }
+
     const createTask = (task, i) => {
         const completedClass = `${task.completed === true ? ' complite': ''}`;
         return `
@@ -64,10 +70,13 @@ function toDoShka() {
         const noTasks = () => todoTasks.innerHTML = '<p>Задач нет! Дабавьте задачу</p>';
         todoTasks.innerHTML = '';
         if (lst.tasks) {
+            filterTasks();
+
             taskArr.forEach((task, i) => {
                 todoTasks.innerHTML += createTask(task, i);
                 switchComplete();
                 deleteTask();
+
             })
             if (lst.tasks.length < 4) {
                 noTasks();
