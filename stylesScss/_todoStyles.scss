@@ -55,3 +55,19 @@
 
     }
 }
+
+.svg {
+    &-checkMark {
+        fill: transparent;
+        stroke: $active-text-color;
+        stroke-width: 20px;
+        transition: .9s;
+
+        &.active {
+            fill: $main-text-color;
+            stroke: $main-text-color;
+            stroke-width: 20px;
+            transition: .9s;
+        }
+    }
+}

@@ -31,11 +31,11 @@ function toDoShka() {
             })
         });
     }
-    const deleteTask = () => {
+    const deleteTask = (idx) => {
         const btnDelete = document.querySelectorAll('.btn__delete');
-        btnDelete.forEach((btn, i) => {
+        btnDelete.forEach((btn) => {
             btn.addEventListener("click", () => {
-                taskArr.splice(i, 1);
+                taskArr.splice(idx, 1);
                 setTask();
                 renderTask();
             })
@@ -44,24 +44,32 @@ function toDoShka() {
 
 
     const filterTasks = () => {
-        const activeTasks = taskArr.length && taskArr.filter(item => item.completed === false);
-        const completedTasks = taskArr.length && taskArr.filter(item => item.completed === true);
+        const activeTasks = taskArr.length ? taskArr.filter(item => item.completed === false) : [];
+        const completedTasks = taskArr.length ? taskArr.filter(item => item.completed === true) : [];
         taskArr = [...activeTasks, ...completedTasks];
     }
 
     const createTask = (task, i) => {
         const completedClass = `${task.completed === true ? ' complite': ''}`;
+        const svg = (id, className = null) => {
+            return `
+            <svg svg class = "svg svg-${id} ${className || ''}" >
+                    <use xlink:href="assets/svg/svgSprite.svg#${id}"></use>
+                </svg>
+            `
+        }
         return `
     <li class="task">
-        <span class="task__value ${completedClass}"> ${i + 1}) ${task.text} </span>
-        <span class="task__controls">
-            <button class="btn btn__form btn__complite">${task.completed === true ? '-': '+'}</button>
-            <button class="btn btn__form btn__delete">
-                <svg class="svg svg-trash">
-                    <use xlink:href="assets/svg/svgSprite.svg#trash"></use>
-                </svg>
+        <input readonly type="text" class="task__value ${completedClass}" value="${i + 1}) ${task.text} "/>
+        <div class="task__controls">
+            <button button class = "btn btn__form btn__edit" >
+                ${svg('edit')}
             </button>
-        </span>
+            <button class="btn btn__form btn__complite">${task.completed === true ? svg('checkMark', 'active'): svg('checkMark')}</button>
+            <button class="btn btn__form btn__delete">
+                ${svg('trash')}
+            </button>
+        </div>
     </li>
     `
     }
@@ -75,8 +83,7 @@ function toDoShka() {
             taskArr.forEach((task, i) => {
                 todoTasks.innerHTML += createTask(task, i);
                 switchComplete();
-                deleteTask();
-
+                deleteTask(i);
             })
             if (lst.tasks.length < 4) {
                 noTasks();
