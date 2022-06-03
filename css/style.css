@@ -24,7 +24,8 @@ button {
   font-family: inherit;
 }
 
-input {
+input,
+textarea {
   background: transparent;
   border: none;
   outline: none;
@@ -47,6 +48,11 @@ input {
   background: linear-gradient(45deg, #f0e, rgb(0, 255, 68));
   min-height: 100vh;
   font-size: 16px;
+}
+@media screen and (max-width: 739px) {
+  .wrapper {
+    font-size: 12px;
+  }
 }
 
 .btn {
@@ -99,10 +105,15 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   margin: 10px 0;
 }
 .task__value {
   flex: 3;
+  min-width: 200px;
+  height: auto;
+  resize: none;
+  overflow: hidden;
 }
 .task:hover {
   background-color: rgba(255, 255, 255, 0.3);

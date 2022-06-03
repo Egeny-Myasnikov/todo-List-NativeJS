@@ -35,10 +35,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     margin: 10px 0;
 
     &__value {
         flex: 3;
+        // background-color: #fff;
+        min-width: 200px;
+        height: auto;
+        resize: none;
+        overflow: hidden;
 
     }
 

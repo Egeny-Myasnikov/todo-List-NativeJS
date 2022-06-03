@@ -17,6 +17,10 @@
     background: $main-bg-color-gradient;
     min-height: 100vh;
     font-size: 16px;
+
+    @media screen and (max-width:739px) {
+        font-size: 12px;
+    }
 }
 
 .btn {

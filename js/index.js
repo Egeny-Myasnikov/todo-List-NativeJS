@@ -60,13 +60,14 @@ function toDoShka() {
         }
         return `
     <li class="task">
-        <input readonly type="text" class="task__value ${completedClass}" value="${i + 1}) ${task.text} "/>
+        <span class="task__value ${completedClass}" >${i + 1}) ${task.text} </span>
+        <textarea style=" background-color:#333; width:100%;">asasas</textarea>
         <div class="task__controls">
-            <button button class = "btn btn__form btn__edit" >
+            <button title = "Изменить" class = "btn btn__form btn__edit" >
                 ${svg('edit')}
             </button>
-            <button class="btn btn__form btn__complite">${task.completed === true ? svg('checkMark', 'active'): svg('checkMark')}</button>
-            <button class="btn btn__form btn__delete">
+            <button title="Выполнено" class="btn btn__form btn__complite">${task.completed === true ? svg('checkMark', 'active'): svg('checkMark')}</button>
+            <button title="Удалить" class="btn btn__form btn__delete">
                 ${svg('trash')}
             </button>
         </div>
