@@ -29,8 +29,22 @@ textarea {
   background: transparent;
   border: none;
   outline: none;
-  font-size: inherit;
+  font-size: 1em;
+  font-family: inherit;
   color: inherit;
+}
+
+.line {
+  display: inline-block;
+  height: 1px;
+  width: 100%;
+  border: 0.5px solid #f0e;
+  box-shadow: 0px 0px 10px #f0e, 0px 0px 20px #f0e, 0px 0px 30px #f0e;
+  margin: 30px 0;
+}
+
+.hiddden {
+  display: none;
 }
 
 ._container {
@@ -107,6 +121,7 @@ textarea {
   align-items: center;
   flex-wrap: wrap;
   margin: 10px 0;
+  transition: 0.5s ease-in-out;
 }
 .task__value {
   flex: 3;
@@ -120,20 +135,100 @@ textarea {
 }
 .task__controls {
   display: flex;
-  gap: 10px;
+  gap: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 0;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
+  transform: translateY(100%);
+  opacity: 0;
+  height: 0;
+  -webkit-animation: controlsHiddeAnimate 0.5s ease-in-out forwards;
+          animation: controlsHiddeAnimate 0.5s ease-in-out forwards;
+}
+.task:hover .task__controls {
+  -webkit-animation: controlsVisibleAnimate 0.5s ease-in-out forwards;
+          animation: controlsVisibleAnimate 0.5s ease-in-out forwards;
 }
 
+@-webkit-keyframes controlsVisibleAnimate {
+  from {
+    display: none;
+    z-index: -1;
+    height: 0px;
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    display: flex;
+    z-index: 2;
+    height: 100%;
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes controlsVisibleAnimate {
+  from {
+    display: none;
+    z-index: -1;
+    height: 0px;
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    display: flex;
+    z-index: 2;
+    height: 100%;
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes controlsHiddeAnimate {
+  from {
+    z-index: 2;
+    display: flex;
+    height: 100%;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    display: none;
+    z-index: -1;
+    height: 0px;
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+@keyframes controlsHiddeAnimate {
+  from {
+    z-index: 2;
+    display: flex;
+    height: 100%;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    display: none;
+    z-index: -1;
+    height: 0px;
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+.svg {
+  height: 100%;
+}
 .svg-checkMark {
   fill: transparent;
   stroke: rgb(92, 170, 113);
   stroke-width: 20px;
-  transition: 0.9s;
 }
 .svg-checkMark.active {
   fill: rgb(0, 255, 68);
   stroke: rgb(0, 255, 68);
   stroke-width: 20px;
-  transition: 0.9s;
 }
 
 .form {
@@ -150,7 +245,25 @@ textarea {
   padding: 10px 30px;
 }
 
+.btn__edit-apply {
+  font-size: 0.7em;
+}
+
 .form__input {
   width: 100%;
   border-bottom: 1px solid #f0e;
+}
+
+.task__form-edit {
+  display: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  justify-content: center;
+  align-items: center;
+  font-size: inherit;
+}
+.task__form-edit-text {
+  text-indent: 20px;
+}
+.task__form-edit.visible {
+  display: flex;
 }/*# sourceMappingURL=style.css.map */

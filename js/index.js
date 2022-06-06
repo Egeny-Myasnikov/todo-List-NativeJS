@@ -4,6 +4,7 @@ function toDoShka() {
     const todoForm = document.querySelector('.todo-form');
     const todoFormInput = todoForm.querySelector('.input__task');
     const todoTasks = document.querySelector('.todo-tasks');
+    const todoTasksCompleted = document.querySelector('.todo-tasks-completed');
     const btnClearList = document.querySelector('.btn__form__clear');
     const lst = window.localStorage;
 
@@ -19,6 +20,40 @@ function toDoShka() {
 
     const setTask = () => {
         lst.setItem("tasks", JSON.stringify(taskArr));
+    }
+
+    const editTask = (idx) => {
+        const formEdit = document.querySelectorAll('.task__form-edit');
+        const formEditText = document.querySelectorAll('.task__form-edit-text');
+        formEdit[idx].classList.toggle('visible');
+
+        formEdit.forEach((formEdit, i) => {
+            formEdit.addEventListener("submit", (e) => {
+                e.preventDefault();
+                if (formEditText[i].value) {
+                    taskArr[i].text = formEditText[i].value;
+                    setTask();
+                    renderTask();
+                }
+
+            })
+        });
+    }
+    const editTask2 = (e) => {
+        const formEdit = document.querySelectorAll('.task__form-edit');
+        const formEditText = document.querySelectorAll('.task__form-edit-text');
+        formEdit[idx].classList.toggle('visible');
+        formEdit.forEach((formEdit, i) => {
+            formEdit.addEventListener("submit", (e) => {
+                e.preventDefault();
+                if (formEditText[i].value) {
+                    taskArr[i].text = formEditText[i].value;
+                    setTask();
+                    renderTask();
+                }
+
+            })
+        });
     }
 
     const switchComplete = () => {
@@ -53,20 +88,25 @@ function toDoShka() {
         const completedClass = `${task.completed === true ? ' complite': ''}`;
         const svg = (id, className = null) => {
             return `
-            <svg svg class = "svg svg-${id} ${className || ''}" >
+            <svg class = "svg svg-${id} ${className || ''}" >
                     <use xlink:href="assets/svg/svgSprite.svg#${id}"></use>
                 </svg>
             `
         }
         return `
     <li class="task">
-        <span class="task__value ${completedClass}" >${i + 1}) ${task.text} </span>
-        <textarea style=" background-color:#333; width:100%;">asasas</textarea>
+    <div>
+    <span class="task__value ${completedClass}" >${i + 1}) ${task.text} </span>
+     <form class="task__form-edit">
+            <textarea class="task__form-edit-text">${task.text}</textarea>
+            <button class="btn btn__form btn__edit-apply">Применить</button>
+         </form> 
+    </div>
         <div class="task__controls">
             <button title = "Изменить" class = "btn btn__form btn__edit" >
                 ${svg('edit')}
             </button>
-            <button title="Выполнено" class="btn btn__form btn__complite">${task.completed === true ? svg('checkMark', 'active'): svg('checkMark')}</button>
+            <button title="${task.completed === true ? 'Не выполнено': 'Выполнено'}" class="btn btn__form btn__complite">${task.completed === true ? svg('checkMark', 'active'): svg('checkMark')}</button>
             <button title="Удалить" class="btn btn__form btn__delete">
                 ${svg('trash')}
             </button>
@@ -78,13 +118,22 @@ function toDoShka() {
     const renderTask = () => {
         const noTasks = () => todoTasks.innerHTML = '<p>Задач нет! Дабавьте задачу</p>';
         todoTasks.innerHTML = '';
+        todoTasksCompleted.innerHTML = '';
         if (lst.tasks) {
             filterTasks();
-
             taskArr.forEach((task, i) => {
-                todoTasks.innerHTML += createTask(task, i);
+                todoTasks.innerHTML += !task.completed ? createTask(task, i) : '';
+                todoTasksCompleted.innerHTML += task.completed ? createTask(task, i) : '';
+
+                const btnEdit = document.querySelectorAll('.btn__edit');
+                btnEdit.forEach((btnEdit, idx) => btnEdit.addEventListener('click', () => {
+                    editTask(idx);
+                }))
+
                 switchComplete();
                 deleteTask(i);
+
+
             })
             if (lst.tasks.length < 4) {
                 noTasks();

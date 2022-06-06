@@ -14,7 +14,30 @@
     padding: 10px 30px;
 }
 
+.btn__edit-apply {
+    font-size: .7em;
+}
+
 .form__input {
     width: 100%;
     border-bottom: 1px solid $border-color;
+}
+
+.task__form-edit {
+    display: none;
+    background-color: rgba(255, 255, 255, .1);
+    justify-content: center;
+    align-items: center;
+    font-size: inherit;
+
+    &-text {
+        // padding: 10px 10px 10px 30px;
+        // padding-left: 30px;
+        text-indent: 20px;
+    }
+
+    &.visible {
+        display: flex;
+    }
+
 }

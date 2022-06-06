@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/index.js" defer></script>
+    <link rel="manifest" href="manifest.json">
     <title>ToDo List NativeJS</title>
 </head>
 
@@ -15,7 +16,12 @@
         <h1>ToDo List NativeJS</h1>
         <div class="_container todo">
             <div class="todo-overlay">
+                <!-- <h3>Не выполнено</h3> -->
                 <ul class="todo-tasks">
+                </ul>
+                <!-- <h3 class="title-cokmpleted">Выполнено</h3> -->
+                <div class="line"></div>
+                <ul class="todo-tasks-completed">
 
                 </ul>
                 <form class="form todo-form">
@@ -25,9 +31,13 @@
                 </form>
 
 
+
+
             </div>
         </div>
     </div>
+
+    <textarea autofocus name="" id="" cols="30" rows="10"></textarea>
 </body>
 
 </html>

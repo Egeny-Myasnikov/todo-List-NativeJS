@@ -37,6 +37,7 @@
     align-items: center;
     flex-wrap: wrap;
     margin: 10px 0;
+    transition: .5s ease-in-out;
 
     &__value {
         flex: 3;
@@ -57,23 +58,73 @@
 
     &__controls {
         display: flex;
-        gap: 10px;
+        gap: 0px;
+        background-color: rgba(0, 0, 0, .5);
+        padding: 10px 0;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 100%;
+        transform: translateY(100%);
+        opacity: 0;
+        height: 0;
+        animation: controlsHiddeAnimate .5s ease-in-out forwards;
+    }
+
+    &:hover &__controls {
+        animation: controlsVisibleAnimate .5s ease-in-out forwards;
 
     }
 }
 
+@keyframes controlsVisibleAnimate {
+    from {
+        display: none;
+        z-index: -1;
+        height: 0px;
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        display: flex;
+        z-index: 2;
+        height: 100%;
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes controlsHiddeAnimate {
+    from {
+        z-index: 2;
+        display: flex;
+        height: 100%;
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        display: none;
+        z-index: -1;
+        height: 0px;
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+}
+
 .svg {
+    height: 100%;
+
     &-checkMark {
         fill: transparent;
         stroke: $active-text-color;
         stroke-width: 20px;
-        transition: .9s;
 
         &.active {
             fill: $main-text-color;
             stroke: $main-text-color;
             stroke-width: 20px;
-            transition: .9s;
         }
     }
 }
