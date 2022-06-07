@@ -39,22 +39,6 @@ function toDoShka() {
             })
         });
     }
-    const editTask2 = (e) => {
-        const formEdit = document.querySelectorAll('.task__form-edit');
-        const formEditText = document.querySelectorAll('.task__form-edit-text');
-        formEdit[idx].classList.toggle('visible');
-        formEdit.forEach((formEdit, i) => {
-            formEdit.addEventListener("submit", (e) => {
-                e.preventDefault();
-                if (formEditText[i].value) {
-                    taskArr[i].text = formEditText[i].value;
-                    setTask();
-                    renderTask();
-                }
-
-            })
-        });
-    }
 
     const switchComplete = () => {
         const btnComplete = document.querySelectorAll('.btn__complite');
@@ -66,11 +50,11 @@ function toDoShka() {
             })
         });
     }
-    const deleteTask = (idx) => {
+    const deleteTask = () => {
         const btnDelete = document.querySelectorAll('.btn__delete');
-        btnDelete.forEach((btn) => {
+        btnDelete.forEach((btn, i) => {
             btn.addEventListener("click", () => {
-                taskArr.splice(idx, 1);
+                taskArr.splice(i, 1);
                 setTask();
                 renderTask();
             })
