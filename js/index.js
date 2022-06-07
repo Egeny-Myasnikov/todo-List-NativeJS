@@ -22,6 +22,15 @@ function toDoShka() {
         lst.setItem("tasks", JSON.stringify(taskArr));
     }
 
+    const showHideTaskControls = (controls) => {
+        controls.forEach(control => {
+            control.addEventListener('click', () => {
+                controls.forEach(c => c.classList.remove('activeControls'));
+                control.classList.toggle('activeControls');
+            })
+        })
+    }
+
     const editTask = (idx) => {
         const formEdit = document.querySelectorAll('.task__form-edit');
         const formEditText = document.querySelectorAll('.task__form-edit-text');
@@ -79,7 +88,7 @@ function toDoShka() {
         }
         return `
     <li class="task">
-    <div>
+    <div class="task__content">
     <span class="task__value ${completedClass}" >${i + 1}) ${task.text} </span>
      <form class="task__form-edit">
             <textarea class="task__form-edit-text">${task.text}</textarea>
@@ -108,6 +117,9 @@ function toDoShka() {
             taskArr.forEach((task, i) => {
                 todoTasks.innerHTML += !task.completed ? createTask(task, i) : '';
                 todoTasksCompleted.innerHTML += task.completed ? createTask(task, i) : '';
+
+                const btnTaskControls = document.querySelectorAll('.task__controls');
+                showHideTaskControls(btnTaskControls);
 
                 const btnEdit = document.querySelectorAll('.btn__edit');
                 btnEdit.forEach((btnEdit, idx) => btnEdit.addEventListener('click', () => {
@@ -147,6 +159,9 @@ function toDoShka() {
     })
 
     renderTask();
+
+
+
 }
 
 

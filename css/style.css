@@ -81,11 +81,8 @@ textarea {
 }
 
 .svg {
-  position: absolute;
-  -o-object-fit: cover;
-     object-fit: cover;
   width: 1em;
-  height: 1.2em;
+  height: 1em;
   fill: rgb(0, 255, 68);
 }
 
@@ -119,12 +116,15 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  margin: 10px 0;
-  transition: 0.5s ease-in-out;
+  margin: 20px 0;
+  transition: 0.2s ease-in-out;
+  position: relative;
+}
+.task__content {
+  width: 100%;
 }
 .task__value {
-  flex: 3;
+  display: block;
   min-width: 200px;
   height: auto;
   resize: none;
@@ -135,100 +135,56 @@ textarea {
 }
 .task__controls {
   display: flex;
-  gap: 0px;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px 0;
+  gap: 5px;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
-  overflow: hidden;
+  width: 20px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: 0.5s;
+}
+.task__controls::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  transform: translateY(100%);
-  opacity: 0;
-  height: 0;
-  -webkit-animation: controlsHiddeAnimate 0.5s ease-in-out forwards;
-          animation: controlsHiddeAnimate 0.5s ease-in-out forwards;
-}
-.task:hover .task__controls {
-  -webkit-animation: controlsVisibleAnimate 0.5s ease-in-out forwards;
-          animation: controlsVisibleAnimate 0.5s ease-in-out forwards;
-}
-
-@-webkit-keyframes controlsVisibleAnimate {
-  from {
-    display: none;
-    z-index: -1;
-    height: 0px;
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    display: flex;
-    z-index: 2;
-    height: 100%;
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes controlsVisibleAnimate {
-  from {
-    display: none;
-    z-index: -1;
-    height: 0px;
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    display: flex;
-    z-index: 2;
-    height: 100%;
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@-webkit-keyframes controlsHiddeAnimate {
-  from {
-    z-index: 2;
-    display: flex;
-    height: 100%;
-    transform: translateY(0);
-    opacity: 1;
-  }
-  to {
-    display: none;
-    z-index: -1;
-    height: 0px;
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
-@keyframes controlsHiddeAnimate {
-  from {
-    z-index: 2;
-    display: flex;
-    height: 100%;
-    transform: translateY(0);
-    opacity: 1;
-  }
-  to {
-    display: none;
-    z-index: -1;
-    height: 0px;
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
-.svg {
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
-.svg-checkMark {
-  fill: transparent;
-  stroke: rgb(92, 170, 113);
-  stroke-width: 20px;
+.task__controls button {
+  width: 5px;
+  height: 5px;
+  background-color: #f00;
+  border-radius: 50%;
+  padding: 0;
+  transition: 0.5s;
 }
-.svg-checkMark.active {
-  fill: rgb(0, 255, 68);
-  stroke: rgb(0, 255, 68);
-  stroke-width: 20px;
+.task__controls button svg {
+  font-size: 0em;
+  transition: 0.5s;
+}
+.task__controls.activeControls {
+  width: 100px;
+  height: 200px;
+  transition: 0.5s;
+}
+.task__controls.activeControls::after {
+  display: none;
+}
+.task__controls.activeControls button {
+  width: 50px;
+  height: 50px;
+  transition: 0.5s;
+}
+.task__controls.activeControls button svg {
+  font-size: 1em;
+  transition: 0.5s;
 }
 
 .form {
@@ -256,8 +212,9 @@ textarea {
 
 .task__form-edit {
   display: none;
+  gap: 10px;
   background-color: rgba(255, 255, 255, 0.1);
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   font-size: inherit;
 }
