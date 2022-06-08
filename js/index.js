@@ -23,14 +23,13 @@ function toDoShka() {
     }
 
     const showHideTaskControls = (controls) => {
-        controls.forEach(control => {
+        controls.forEach((control, i) => {
             control.addEventListener('click', (e) => {
-                controls.forEach(c => {
-
-                    c.classList.remove('activeControls')
-                });
+                controls.forEach(c => c.classList.remove('activeControls'));
                 control.classList.toggle('activeControls');
                 if (e.target.classList.contains('task__controls-close')) {
+                    const formEdit = document.querySelectorAll('.task__form-edit');
+                    formEdit[i].classList.remove('visible');
                     control.classList.toggle('activeControls');
                 }
             })
