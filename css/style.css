@@ -63,6 +63,11 @@ textarea {
   min-height: 100vh;
   font-size: 16px;
 }
+.wrapper h1 {
+  background: linear-gradient(90deg, #222, #f0e 50%, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 @media screen and (max-width: 739px) {
   .wrapper {
     font-size: 12px;
@@ -137,9 +142,7 @@ textarea {
   display: flex;
   gap: 5px;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
-  width: 20px;
+  width: 40px;
   height: 40px;
   justify-content: center;
   align-items: center;
@@ -157,10 +160,30 @@ textarea {
   background-color: rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
+.task__controls-close {
+  display: block;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  right: 0;
+  cursor: pointer;
+}
+.task__controls-close::after, .task__controls-close::before {
+  content: " ";
+  background-color: rgb(0, 255, 68);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 1px;
+  transform: translate(-50%, -50%);
+}
 .task__controls button {
-  width: 5px;
-  height: 5px;
-  background-color: #f00;
+  width: 7px;
+  height: 7px;
+  background-color: rgb(0, 255, 68);
   border-radius: 50%;
   padding: 0;
   transition: 0.5s;
@@ -168,6 +191,10 @@ textarea {
 .task__controls button svg {
   font-size: 0em;
   transition: 0.5s;
+  fill: #f0e;
+}
+.task__controls button svg.active {
+  fill: #999;
 }
 .task__controls.activeControls {
   width: 100px;
@@ -177,14 +204,27 @@ textarea {
 .task__controls.activeControls::after {
   display: none;
 }
+.task__controls.activeControls .task__controls-close {
+  width: 30px;
+  height: 30px;
+  transition: width 0.5s 0.4s, height 0.5s 0.4s;
+}
+.task__controls.activeControls .task__controls-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: transform 0.5s 1s;
+}
+.task__controls.activeControls .task__controls-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+  transition: transform 0.5s 1s;
+}
 .task__controls.activeControls button {
   width: 50px;
   height: 50px;
-  transition: 0.5s;
+  transition: width 0.5s var(--i) ease-in-out, height 0.5s var(--i) ease-in;
 }
 .task__controls.activeControls button svg {
   font-size: 1em;
-  transition: 0.5s;
+  transition: font-size 0.5s var(--i);
 }
 
 .form {
@@ -212,6 +252,7 @@ textarea {
 
 .task__form-edit {
   display: none;
+  flex-wrap: wrap;
   gap: 10px;
   background-color: rgba(255, 255, 255, 0.1);
   justify-content: start;
@@ -219,6 +260,7 @@ textarea {
   font-size: inherit;
 }
 .task__form-edit-text {
+  width: 100%;
   text-indent: 20px;
 }
 .task__form-edit.visible {

@@ -18,6 +18,12 @@
     min-height: 100vh;
     font-size: 16px;
 
+    h1 {
+        background: linear-gradient(90deg, #222, $main-bg-color 50%, #333);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
     @media screen and (max-width:739px) {
         font-size: 12px;
     }

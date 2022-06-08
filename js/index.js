@@ -24,9 +24,15 @@ function toDoShka() {
 
     const showHideTaskControls = (controls) => {
         controls.forEach(control => {
-            control.addEventListener('click', () => {
-                controls.forEach(c => c.classList.remove('activeControls'));
+            control.addEventListener('click', (e) => {
+                controls.forEach(c => {
+
+                    c.classList.remove('activeControls')
+                });
                 control.classList.toggle('activeControls');
+                if (e.target.classList.contains('task__controls-close')) {
+                    control.classList.toggle('activeControls');
+                }
             })
         })
     }
@@ -92,15 +98,18 @@ function toDoShka() {
     <span class="task__value ${completedClass}" >${i + 1}) ${task.text} </span>
      <form class="task__form-edit">
             <textarea class="task__form-edit-text">${task.text}</textarea>
-            <button class="btn btn__form btn__edit-apply">Применить</button>
+            <button class="btn btn__form btn__edit-apply" title="Применить">
+             ${svg('change')}
+            </button>
          </form> 
     </div>
         <div class="task__controls">
-            <button title = "Изменить" class = "btn btn__form btn__edit" >
+        <span class="task__controls-close" title="Закрыть"></span>
+            <button style="--i:.3s;" title = "Изменить" class = "btn btn__form btn__edit" >
                 ${svg('edit')}
             </button>
-            <button title="${task.completed === true ? 'Не выполнено': 'Выполнено'}" class="btn btn__form btn__complite">${task.completed === true ? svg('checkMark', 'active'): svg('checkMark')}</button>
-            <button title="Удалить" class="btn btn__form btn__delete">
+            <button style="--i:.6s;" title="${task.completed === true ? 'Добавить сново': 'Выполнено'}" class="btn btn__form btn__complite">${task.completed === true ? svg('plus'): svg('checkMark')}</button>
+            <button button style = "--i:.9s;" title = "Удалить" class = "btn btn__form btn__delete" >
                 ${svg('trash')}
             </button>
         </div>
