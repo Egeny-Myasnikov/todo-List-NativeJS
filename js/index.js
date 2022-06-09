@@ -98,7 +98,7 @@ function toDoShka() {
      <form class="task__form-edit">
             <textarea class="task__form-edit-text">${task.text}</textarea>
             <button class="btn btn__form btn__edit-apply" title="Применить">
-             ${svg('change')}
+             OK
             </button>
          </form> 
     </div>

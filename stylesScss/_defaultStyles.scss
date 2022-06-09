@@ -9,6 +9,20 @@
     box-sizing: border-box;
 }
 
+body,
+textarea,
+input {
+    &::-webkit-scrollbar {
+        width: 3px;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $main-bg-color-gradient;
+
+    }
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -36,6 +50,8 @@ textarea {
     font-size: 1em;
     font-family: inherit;
     color: inherit;
+
+
 
 }
 

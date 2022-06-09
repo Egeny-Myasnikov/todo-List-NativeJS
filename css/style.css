@@ -6,6 +6,18 @@
   box-sizing: border-box;
 }
 
+body::-webkit-scrollbar,
+textarea::-webkit-scrollbar,
+input::-webkit-scrollbar {
+  width: 3px;
+  background: transparent;
+}
+body::-webkit-scrollbar-thumb,
+textarea::-webkit-scrollbar-thumb,
+input::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #f0e, rgb(0, 255, 68));
+}
+
 a {
   color: inherit;
   text-decoration: none;
